@@ -46,7 +46,15 @@ legendary item and as such its Quality is 80 and it never alters.
 ## My approach  
 
 I used Javascript, and Jasmine for testing.
+I diagrammed the flow of the code to understand the legacy code. Then I diagrammed the classes and methods as they are in the legacy code, not changing it yet.
+I wrote tests for every scenario to check how the `updateQuality` method changes the `sellIn` and `quality` attributes of the items. This way I make sure that when refactoring the code I will not break the code by accident.
+
+There are 5 types of items in the Gilded Rose: `Aged Brie`, `Sulfuras`, `Backstage Pass`, `Conjured` and everything else. The best way to organise the code would probably be to create separate classes base on the type of item, however we are not allowed to change the `Item` class. The massive conditional statements can be replaced with private methods that are executed depending on the type of item.
 
 ## Domain Model
 
+![domain model](images/domain.PNG)
+
 ## Flow diagram
+
+![flow diagram](images/flow.PNG)
