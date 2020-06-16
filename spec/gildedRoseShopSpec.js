@@ -42,5 +42,37 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(agedBrie.quality).toEqual(50);
     })
+      //Backstage pass
+    it('increases quality of Backstage Passes by 1 as long as sellIn is more than 10', function() {
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 11, 12);
+      let shop = new Shop([pass]);
+      shop.updateQuality();
+      expect(pass.quality).toEqual(13);
+    })
+    it('increases quality of Backstage Passes by 2 as long as sellIn is equal or less than 10', function() {
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 12);
+      let shop = new Shop([pass]);
+      shop.updateQuality();
+      expect(pass.quality).toEqual(14);
+    })
+    it('increases quality of Backstage Passes by 3 as long as sellIn is less than 5', function() {
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 3, 12);
+      let shop = new Shop([pass]);
+      shop.updateQuality();
+      expect(pass.quality).toEqual(15);
+    })
+    it('keeps quality at 50 of Backstage Passes after reaching 50', function() {
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50);
+      let shop = new Shop([pass]);
+      shop.updateQuality();
+      expect(pass.quality).toEqual(50);
+    })
+    it('keeps quality of Backstage Passes at 0 after passing sellIn date', function() {
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', -1, 12);
+      let shop = new Shop([pass]);
+      shop.updateQuality();
+      expect(pass.quality).toEqual(0);
+    })
+
   })
 })
