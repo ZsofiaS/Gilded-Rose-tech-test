@@ -16,8 +16,7 @@ class Shop {
          else if (item.name != 'Backstage passes to a TAFKAL80ETC concert'
               && item.name != 'Sulfuras, Hand of Ragnaros'
               && item.name != 'Aged Brie') {
-               item.sellIn--;
-               item.quality--;
+               this._updateElse(item);
          }
       });
 
@@ -52,5 +51,10 @@ class Shop {
         }
     }
     item.sellIn--;
+  }
+
+  _updateElse(item) {
+    item.sellIn--;
+    item.quality--;
   }
 }
