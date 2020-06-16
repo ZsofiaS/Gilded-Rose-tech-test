@@ -14,11 +14,6 @@ class Shop {
           this.items[i].quality = 50;
         }
       }
-      // case for Sulfuras - nothing changes - no need of any code!!
-     else if (this.items[i].name == 'Sulfuras, Hand of Ragnaros') {
-        this.items[i].quality = 80;
-        this.items[i].sellIn;
-      }
       // case for Backstage Pass
       else if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
         if (this.items[i].sellIn < 0) {
@@ -40,9 +35,11 @@ class Shop {
         }
       }
       // case for everything else
-       else {
-         this.items[i].sellIn--;
-         this.items[i].quality--;
+       else if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert'
+            && this.items[i].name != 'Sulfuras, Hand of Ragnaros'
+            && this.items[i].name != 'Aged Brie') {
+             this.items[i].sellIn--;
+             this.items[i].quality--;
        }
     }
 
