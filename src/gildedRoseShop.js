@@ -6,12 +6,7 @@ class Shop {
     this.items.forEach((item) => {
         // case for Aged Brie
         if (item.name == 'Aged Brie') {
-              item.sellIn--;
-          if (item.quality < 50) {
-            item.quality++;
-          } else {
-            item.quality = 50;
-          }
+          this._updateAgedBrie(item);
         }
         // case for Backstage Pass
         else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
@@ -32,6 +27,7 @@ class Shop {
                 item.quality++;
               }
           }
+          item.sellIn--;
         }
         // case for everything else
          else if (item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -43,5 +39,14 @@ class Shop {
       });
 
     return this.items;
+  }
+
+  _updateAgedBrie(item) {
+    item.sellIn--;
+    if (item.quality < 50) {
+      item.quality++;
+    } else {
+      item.quality = 50;
+    }
   }
 }
