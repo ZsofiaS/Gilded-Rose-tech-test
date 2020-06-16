@@ -11,6 +11,8 @@ class Shop {
         // case for Backstage Pass
         else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
           this._updateBackstagePass(item);
+        } else if (item.name == 'Conjured') {
+          this._updateConjured(item);
         }
         // case for everything else
          else if (item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -51,6 +53,11 @@ class Shop {
         }
     }
     item.sellIn--;
+  }
+
+  _updateConjured(item) {
+    item.sellIn--;
+    item.quality = item.quality - 2;
   }
 
   _updateElse(item) {

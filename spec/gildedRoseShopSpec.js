@@ -85,5 +85,13 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(cheddar.quality).toEqual(9);
     })
+
+    //Conjured
+    it('decreases quality of Conjured', function() {
+      let conjured = new Item('Conjured', 20, 20);
+      let shop = new Shop([conjured]);
+      shop.updateQuality();
+      expect(conjured.quality).toEqual(18);
+    })
   })
 })
