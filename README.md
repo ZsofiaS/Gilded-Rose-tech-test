@@ -43,6 +43,10 @@ legendary item and as such its Quality is 80 and it never alters.
 
 ## How to use
 
+## My approach  
+
+I used Javascript, and Jasmine for testing.
+
 ## Domain Model
 
 ## Flow diagram
