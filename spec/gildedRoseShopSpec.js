@@ -20,5 +20,11 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(sulfuras.sellIn).toEqual(0);
     })
+    it('keeps quality at 80 for Sulfuras', function() {
+      let sulfuras = new Item('Sulfuras, Hand of Ragnaros', 0, 80);
+      let shop = new Shop([sulfuras]);
+      shop.updateQuality();
+      expect(sulfuras.quality).toEqual(80);
+    })
   })
 })
