@@ -1,6 +1,12 @@
 'use strict';
 
 describe('Shop', function() {
+
+  it('stores an array of items', function() {
+    let agedBrie = new Item('Aged Brie', 30, 20);
+    let shop = new Shop([agedBrie]);
+    expect(shop.items.length).toEqual(1);
+  })
   describe('#updateQuality', function() {
     it('decreases sellIn attribute by 1 for any product but Sulfuras', function() {
       let cheddar = new Item('Cheddar', 10, 10);
