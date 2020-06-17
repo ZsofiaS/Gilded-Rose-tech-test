@@ -8,7 +8,6 @@ class Shop {
       });
     return this.items;
   }
-
   _updateByType(item) {
     let types = {
       'Aged Brie': this._updateAgedBrie,
@@ -23,14 +22,12 @@ class Shop {
       return types['default'](item)
     }
   }
-
   _updateAgedBrie(item) {
     item.sellIn--;
     if (item.quality < 50) {
       item.quality++;
     }
   }
-
   _updateBackstagePass(item) {
     if (item.quality < 50) {
       if (item.sellIn < 0) {
@@ -45,12 +42,10 @@ class Shop {
     }
     item.sellIn--;
   }
-
   _updateConjured(item) {
     item.sellIn--;
     item.quality = item.quality - 2;
   }
-
   _updateElse(item) {
     item.sellIn--;
     item.quality--;
