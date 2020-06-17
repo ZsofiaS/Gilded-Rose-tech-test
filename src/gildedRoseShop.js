@@ -3,22 +3,26 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
-    this.items.forEach((item) => {
-        // case for Aged Brie
-        if (item.name == 'Aged Brie') {
-          this._updateAgedBrie(item);
-        } else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            this._updateBackstagePass(item);
-        } else if (item.name == 'Conjured') {
-            this._updateConjured(item);
-        } else if (item.name == 'Sulfuras, Hand of Ragnaros') {
-            return;
-        } else {
-            this._updateElse(item);
-         }
-      });
 
+    this.items.forEach((item) => {
+        this._updateByType(item)
+      });
     return this.items;
+  }
+
+  _updateByType(item) {
+    let types = {
+      'Aged Brie': this._updateAgedBrie,
+      'Backstage passes to a TAFKAL80ETC concert': this._updateBackstagePass,
+      'Conjured': this._updateConjured,
+      'Sulfuras, Hand of Ragnaros': function() { return },
+      'default': this._updateElse
+    }
+    if (types[item.name]) {
+      return types[item.name](item)
+    } else {
+      return types['default'](item)
+    }
   }
 
   _updateAgedBrie(item) {
