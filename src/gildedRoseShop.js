@@ -16,17 +16,12 @@ class Shop {
       'Sulfuras, Hand of Ragnaros': function() { return },
       'default': this._updateElse
     }
-    if (types[item.name]) {
-      return types[item.name](item)
-    } else {
-      return types['default'](item)
-    }
+    // if item.name is in the 'types' object -> call the function, otherwise -> call default function
+    types[item.name] ? types[item.name](item) : types['default'](item)
   }
   _updateAgedBrie(item) {
     item.sellIn--;
-    if (item.quality < 50) {
-      item.quality++;
-    }
+    item.quality < 50 ? item.quality++ : null
   }
   _updateBackstagePass(item) {
     if (item.quality < 50) {
@@ -44,19 +39,13 @@ class Shop {
   }
   _updateConjured(item) {
     item.sellIn--;
-    if (item.quality > 1) {
-      item.quality = item.quality - 2;
-    }
+    item.quality > 1 ? item.quality = item.quality -2 : null
   }
   _updateElse(item) {
     if (item.sellIn <= 0) {
-      if (item.quality > 1) {
-        item.quality = item.quality - 2;
-      }
+      item.quality > 1 ? item.quality = item.quality - 2 : null
     } else {
-      if (item.quality > 0) {
-        item.quality--;
-      }
+      item.quality > 0 ? item.quality-- : null
     }
     item.sellIn--;
   }
