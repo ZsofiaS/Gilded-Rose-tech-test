@@ -65,7 +65,7 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(pass.quality).toEqual(15);
     })
-    it('keeps quality at 50 of Backstage Passes after reaching 50', function() {
+    it('quality of Backstage Passes cannot be more than 50', function() {
       let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 50);
       let shop = new Shop([pass]);
       shop.updateQuality();
@@ -79,11 +79,23 @@ describe('Shop', function() {
     })
 
     //Everything else
-    it('decreases quality of all other items', function() {
+    it('decreases quality by 1 of all other items', function() {
       let cheddar = new Item('Cheddar', 10, 10);
       let shop = new Shop([cheddar]);
       shop.updateQuality();
       expect(cheddar.quality).toEqual(9);
+    })
+    it('decreases quality by 2 of all other items after passing expiry date', function() {
+      let cheddar = new Item('Cheddar', 0, 10);
+      let shop = new Shop([cheddar]);
+      shop.updateQuality();
+      expect(cheddar.quality).toEqual(8);
+    })
+    it('never decreases quality below 0', function() {
+      let soulstone = new Item('Soulstone', 10, 0);
+      let shop = new Shop([soulstone]);
+      shop.updateQuality();
+      expect(soulstone.quality).toEqual(0);
     })
 
     //Conjured
@@ -92,6 +104,12 @@ describe('Shop', function() {
       let shop = new Shop([conjured]);
       shop.updateQuality();
       expect(conjured.quality).toEqual(18);
+    })
+    it('never decreases quality below 0', function() {
+      let conjured = new Item('Conjured', 10, 0);
+      let shop = new Shop([conjured]);
+      shop.updateQuality();
+      expect(conjured.quality).toEqual(0);
     })
   })
 })

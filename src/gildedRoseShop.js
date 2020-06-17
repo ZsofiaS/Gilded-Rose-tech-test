@@ -44,10 +44,20 @@ class Shop {
   }
   _updateConjured(item) {
     item.sellIn--;
-    item.quality = item.quality - 2;
+    if (item.quality > 1) {
+      item.quality = item.quality - 2;
+    }
   }
   _updateElse(item) {
+    if (item.sellIn <= 0) {
+      if (item.quality > 1) {
+        item.quality = item.quality - 2;
+      }
+    } else {
+      if (item.quality > 0) {
+        item.quality--;
+      }
+    }
     item.sellIn--;
-    item.quality--;
   }
 }
