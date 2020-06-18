@@ -22,7 +22,7 @@ class Shop {
   _updateSellInByType(item) {
     let types = {
       'Sulfuras, Hand of Ragnaros': function() { return },
-      'default': this._updateSellIn
+      'default': function() { item.sellIn-- }
     }
     types[item.name] ? types[item.name](item) : types['default'](item);
   }
@@ -51,8 +51,5 @@ class Shop {
     } else {
       item.quality > 0 ? item.quality-- : null
     }
-  }
-  _updateSellIn(item) {
-    item.sellIn--;
   }
 }
