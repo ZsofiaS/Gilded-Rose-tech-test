@@ -4,11 +4,12 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach((item) => {
-        this._updateByType(item)
-      });
+      this._updateQualityByType(item);
+      this._updateSellInByType(item);
+    });
     return this.items;
   }
-  _updateByType(item) {
+  _updateQualityByType(item) {
     let types = {
       'Aged Brie': this._updateAgedBrie,
       'Backstage passes to a TAFKAL80ETC concert': this._updateBackstagePass,
@@ -16,11 +17,16 @@ class Shop {
       'Sulfuras, Hand of Ragnaros': function() { return },
       'default': this._updateElse
     }
-    // if item.name is in the 'types' object -> call the function, otherwise -> call default function
-    types[item.name] ? types[item.name](item) : types['default'](item)
+    types[item.name] ? types[item.name](item) : types['default'](item);
+  }
+  _updateSellInByType(item) {
+    let types = {
+      'Sulfuras, Hand of Ragnaros': function() { return },
+      'default': this._updateSellIn
+    }
+    types[item.name] ? types[item.name](item) : types['default'](item);
   }
   _updateAgedBrie(item) {
-    item.sellIn--;
     item.quality < 50 ? item.quality++ : null
   }
   _updateBackstagePass(item) {
@@ -35,10 +41,8 @@ class Shop {
             item.quality++;
       }
     }
-    item.sellIn--;
   }
   _updateConjured(item) {
-    item.sellIn--;
     item.quality > 1 ? item.quality = item.quality -2 : null
   }
   _updateElse(item) {
@@ -47,6 +51,8 @@ class Shop {
     } else {
       item.quality > 0 ? item.quality-- : null
     }
+  }
+  _updateSellIn(item) {
     item.sellIn--;
   }
 }

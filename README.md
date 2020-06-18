@@ -45,7 +45,7 @@ legendary item and as such its Quality is 80 and it never alters.
 
 Open SpecRunner.html in the browser, this will automatically run the tests.
 
-In the browser console, you can create instances of the Item class & Shop class, see what's in the shop, then run the `updateQuality` method, like so: 
+In the browser console, you can create instances of the Item class & Shop class, see what's in the shop, then run the `updateQuality` method, like so:
 
 ![screen](images/screen.PNG)
 
@@ -57,7 +57,7 @@ I wrote tests for every type of item to check how the `updateQuality` method cha
 
 There are 5 types of items in the Gilded Rose: `Aged Brie`, `Sulfuras`, `Backstage Pass`, `Conjured` and everything else. The best way to organise the code would probably be to create separate classes base on the type of item, however we are not allowed to change the `Item` class.
 First I refactored the massive conditional statements into more readable code, still using if/else statements. Then I introduced private methods that will be executed depending on the type of item, to calculate their quality and sellIn values.
-Finally I used the object literal pattern to replace the conditional that controls what code to run for what type of item.
+Finally I used the object literal pattern to replace the conditional that controls what code to run for what type of item, and used ternary operators to make the code dryer.
 
 ## Domain Model
 
