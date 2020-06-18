@@ -1,14 +1,12 @@
 'use strict';
 
 describe('Shop', function() {
-
   it('stores an array of items', function() {
     let agedBrie = new Item('Aged Brie', 30, 20);
     let shop = new Shop([agedBrie]);
     expect(shop.items.length).toEqual(1);
   })
   describe('#updateQuality', function() {
-
     //updates sellIn
     it('decreases sellIn attribute by 1 for any product but Sulfuras', function() {
       let cheddar = new Item('Cheddar', 10, 10);
@@ -22,7 +20,6 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(sulfuras.sellIn).toEqual(0);
     })
-
     //updates quality
       //Sulfuras
     it('keeps quality at 80 for Sulfuras', function() {
@@ -31,7 +28,6 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(sulfuras.quality).toEqual(80);
     })
-
       //Aged Brie
     it('increases quality of Aged Brie by 1 up to 50', function() {
       let agedBrie = new Item('Aged Brie', 30, 20);
@@ -45,7 +41,6 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(agedBrie.quality).toEqual(50);
     })
-
       //Backstage pass
     it('increases quality of Backstage Passes by 1 as long as sellIn is more than 10', function() {
       let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 11, 12);
@@ -77,7 +72,6 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(pass.quality).toEqual(0);
     })
-
     //Everything else
     it('decreases quality by 1 of all other items', function() {
       let cheddar = new Item('Cheddar', 10, 10);
@@ -97,7 +91,6 @@ describe('Shop', function() {
       shop.updateQuality();
       expect(soulstone.quality).toEqual(0);
     })
-
     //Conjured
     it('decreases quality of Conjured', function() {
       let conjured = new Item('Conjured', 20, 20);
@@ -110,6 +103,21 @@ describe('Shop', function() {
       let shop = new Shop([conjured]);
       shop.updateQuality();
       expect(conjured.quality).toEqual(0);
+    })
+    //Test for all kind of items
+    it('updates all items as required', function() {
+      let agedBrie = new Item('Aged Brie', 30, 30);
+      let soulstone = new Item('Conjured', 10, 10);
+      let petCharm = new Item('Pet Charm', 10, 10);
+      let pass = new Item('Backstage passes to a TAFKAL80ETC concert', 7, 12);
+      let sulfuras = new Item('Sulfuras, Hand of Ragnaros', 0, 80);
+      let shop = new Shop([agedBrie, soulstone, petCharm, pass, sulfuras]);
+      shop.updateQuality();
+      expect(agedBrie.quality).toEqual(31);
+      expect(soulstone.quality).toEqual(8);
+      expect(petCharm.quality).toEqual(9);
+      expect(pass.quality).toEqual(14);
+      expect(sulfuras.quality).toEqual(80);
     })
   })
 })
