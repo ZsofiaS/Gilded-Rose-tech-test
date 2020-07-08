@@ -1,6 +1,12 @@
 class Shop {
   constructor(items=[]){
     this.items = items;
+    this.maxQuality = 50;
+    this.sellIn0 = 0;
+    this.minQuality = 0;
+    this.sellIn5 = 5;
+    this.sellIn3 = 3;
+    this.sellIn10 = 10;
   }
   updateQuality() {
     this.items.forEach((item) => {
@@ -27,29 +33,29 @@ class Shop {
     types[item.name] ? types[item.name](item) : types['default'](item);
   }
   _updateAgedBrie(item) {
-    item.quality < 50 ? item.quality++ : null
+    item.quality < this.maxQuality ? item.quality++ : null
   }
   _updateBackstagePass(item) {
-    if (item.quality < 50) {
-      if (item.sellIn <= 0) {
-           item.quality = 0;
-      } else if (item.sellIn <= 5) {
+    if (item.quality < this.maxQuality) {
+      if (item.sellIn <= this.sellIn0) {
+           item.quality = this.minQuality;
+      } else if (item.sellIn <= this.sellIn5) {
            item.quality = item.quality + 3;
-      } else if (item.sellIn <= 10) {
+      } else if (item.sellIn <= this.sellIn10) {
           item.quality = item.quality + 2;
-      } else if (item.sellIn > 10) {
+      } else if (item.sellIn > this.sellIn10) {
             item.quality++;
       }
     }
   }
   _updateConjured(item) {
-    item.quality > 1 ? item.quality = item.quality -2 : null
+    item.quality > 1 ? item.quality = item.quality - 2 : null
   }
   _updateElse(item) {
-    if (item.sellIn <= 0) {
+    if (item.sellIn <= this.sellIn0) {
       item.quality > 1 ? item.quality = item.quality - 2 : null
     } else {
-      item.quality > 0 ? item.quality-- : null
+      item.quality > this.minQuality ? item.quality-- : null
     }
   }
 }
